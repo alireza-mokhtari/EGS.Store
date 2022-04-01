@@ -1,6 +1,7 @@
-﻿using FluentValidation.AspNetCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using EGS.Api.Filters;
+using EGS.Api.Services;
+using EGS.Appplication.Common.Abstractions;
+using FluentValidation.AspNetCore;
 
 namespace EGS.Api
 {
@@ -8,7 +9,12 @@ namespace EGS.Api
     {
         public static void Configure(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers();            
+            services.AddSingleton<ICurrentUserService, CurrentUserService>();
+
+            services.AddHttpContextAccessor();
+
+            services.AddControllers(options => options.Filters.Add<ApiExceptionFilterAttribute>());
+
             services.AddFluentValidation();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();

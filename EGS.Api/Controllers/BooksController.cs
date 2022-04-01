@@ -16,6 +16,12 @@ namespace EGS.WebApi.Controllers
         public BooksController(ILogger<BooksController> logger)
         {
             _logger = logger;
-        }        
+        }
+
+        [HttpGet(nameof(GetAll))]
+        public IActionResult GetAll()
+        {
+            return Ok(Summaries);
+        }
     }
 }
