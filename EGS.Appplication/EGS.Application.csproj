@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="10.4.0" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
+    <PackageReference Include="Mapster.Core" Version="1.2.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
@@ -15,10 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EGS.Common\EGS.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dto\" />
   </ItemGroup>
 
 </Project>

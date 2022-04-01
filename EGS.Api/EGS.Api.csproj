@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EGS.Appplication\EGS.Appplication.csproj" />
+    <ProjectReference Include="..\EGS.Appplication\EGS.Application.csproj" />
     <ProjectReference Include="..\EGS.Infrastructure\EGS.Infrastructure.csproj" />
   </ItemGroup>
 
