@@ -9,7 +9,7 @@ using MapsterMapper;
 using Mapster;
 using EGS.Infrastructure.Extensions;
 
-namespace Clay.Infrastructure.Identity
+namespace EGS.Infrastructure.Identity
 {
     public class IdentityService : IIdentityService
     {

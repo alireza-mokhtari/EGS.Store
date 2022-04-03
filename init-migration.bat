@@ -1,0 +1,1 @@
+dotnet ef migrations add "CreateDb" --project EGS.Infrastructure --startup-project EGS.Api --output-dir Persistence\Migrations

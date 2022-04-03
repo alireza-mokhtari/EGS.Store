@@ -1,4 +1,4 @@
-﻿using Clay.Infrastructure.Identity;
+﻿using EGS.Infrastructure.Identity;
 using EGS.Application.Common.Interfaces;
 using EGS.Infrastructure.Identity;
 using EGS.Infrastructure.Persistence;
@@ -20,6 +20,9 @@ namespace EGS.Infrastructure
     {
         public static void Configure(IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<IDomainEventService, DomainEventService>();
+            services.AddTransient<IDateTime, DateTimeService>();
+
             ConfigureDb(services, configuration);
 
             ConfigureIdentity(services, configuration);
