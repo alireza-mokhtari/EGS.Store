@@ -1,5 +1,4 @@
-﻿using EGS.Application.Common.Abstractions;
-using EGS.Application.Common.Interfaces;
+﻿using EGS.Application.Common.Interfaces;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 

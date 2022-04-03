@@ -1,6 +1,5 @@
 ﻿using Duende.IdentityServer.EntityFramework.Options;
 using EGS.Application.Common.Interfaces;
-using EGS.Application.Common.Abstractions;
 using EGS.Domain.Common;
 using EGS.Infrastructure.Identity;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;

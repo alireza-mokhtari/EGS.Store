@@ -1,4 +1,4 @@
-﻿namespace EGS.Application.Common.Abstractions
+﻿namespace EGS.Application.Common.Interfaces
 {
     public interface ICurrentUserService
     {
