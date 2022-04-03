@@ -1,4 +1,4 @@
-﻿using EGS.Application.Common.Abstractions;
+﻿using EGS.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

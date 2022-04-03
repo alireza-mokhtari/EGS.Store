@@ -1,7 +1,7 @@
 ﻿namespace EGS.Domain.Common
 {
-    public interface IEntity<TId> where TId : class
+    public interface IEntity<TKey>
     {
-        TId Id { get; set; }
+        TKey Id { get; set; }
     }
 }

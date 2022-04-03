@@ -5,8 +5,7 @@ using System.Linq.Expressions;
 namespace EGS.Application.Common.Interfaces
 {
     public interface IRepositoryAsync<TEntity, TKey>
-        where TEntity : class, IEntity<TKey>, new()
-        where TKey : class
+        where TEntity : class, IEntity<TKey>, new()        
     {
         Task<TEntity> FirstOrDefaultAsync(CancellationToken cancellationToken,
             Expression<Func<TEntity, bool>> predicate = null,

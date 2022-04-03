@@ -1,6 +1,6 @@
 ﻿using EGS.Api.Filters;
 using EGS.Api.Services;
-using EGS.Application.Common.Abstractions;
+using EGS.Application.Common.Interfaces;
 using FluentValidation.AspNetCore;
 
 namespace EGS.Api

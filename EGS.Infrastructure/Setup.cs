@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication;
+using EGS.Application.Repositories;
+using EGS.Infrastructure.Persistence.Repositories;
 
 namespace EGS.Infrastructure
 {
@@ -20,8 +22,15 @@ namespace EGS.Infrastructure
         {
             ConfigureDb(services, configuration);
 
-            ConfigureIdentity(services,configuration);
+            ConfigureIdentity(services, configuration);
 
+            AddRepositories(services);
+
+        }
+
+        private static void AddRepositories(IServiceCollection services)
+        {
+            services.AddScoped<IBookRepository, BookRepository>();
         }
 
         private static void ConfigureIdentity(IServiceCollection services, IConfiguration configuration)

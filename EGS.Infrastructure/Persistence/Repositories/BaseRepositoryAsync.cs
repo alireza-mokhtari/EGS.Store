@@ -10,7 +10,6 @@ namespace EGS.Infrastructure.Persistence.Repositories
 {
     public class BaseRepositoryAsync<TEntity, TKey> : IRepositoryAsync<TEntity, TKey> 
         where TEntity: class , IEntity<TKey> , new() 
-        where TKey : class
     {
         private readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;

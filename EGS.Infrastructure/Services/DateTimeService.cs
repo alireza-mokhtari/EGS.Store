@@ -1,4 +1,4 @@
-﻿using EGS.Application.Common.Abstractions;
+﻿using EGS.Application.Common.Interfaces;
 
 namespace EGS.Infrastructure.Services
 {

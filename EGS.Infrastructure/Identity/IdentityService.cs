@@ -1,11 +1,7 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using EGS.Application.Common.Exceptions;
+﻿using EGS.Application.Common.Exceptions;
 using EGS.Application.Common.Interfaces;
 using EGS.Application.Common.Models;
 using EGS.Application.Dto;
-using EGS.Application.Common.Abstractions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using EGS.Infrastructure.Identity;

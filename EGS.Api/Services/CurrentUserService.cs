@@ -1,4 +1,4 @@
-﻿using EGS.Application.Common.Abstractions;
+﻿using EGS.Application.Common.Interfaces;
 using System.Security.Claims;
 
 namespace EGS.Api.Services

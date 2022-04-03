@@ -9,7 +9,6 @@ namespace EGS.Domain.Common
 
         public string Modifier { get; set; }
 
-        public DateTime? ModifyDate { get; set; }
-
+        public DateTime? ModifyDate { get; set; }        
     }
 }

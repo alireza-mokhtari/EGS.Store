@@ -1,6 +1,7 @@
 ﻿using Duende.IdentityServer.EntityFramework.Options;
 using EGS.Application.Common.Interfaces;
 using EGS.Domain.Common;
+using EGS.Domain.Entities;
 using EGS.Infrastructure.Identity;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,11 @@ namespace EGS.Infrastructure.Persistence
         private readonly ICurrentUserService _currentUserService;
         private readonly IDomainEventService _domainEventService;
         private readonly IDateTime _dateTime;
+
+        public DbSet<BookGenre> BookGenres { get; set; }
+        public DbSet<Book> Books { get; set; }
+
+
         public ApplicationDbContext(DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions,
             ICurrentUserService currentUserService,
