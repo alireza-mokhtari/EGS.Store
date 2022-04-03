@@ -12,8 +12,8 @@ namespace EGS.Infrastructure.Persistence
             await SeedRoleIfNotExists(roleManager, Constants.ADMIN_ROLE);
             await SeedRoleIfNotExists(roleManager, Constants.CUSTOMER_ROLE);
 
-            await SeedUserIfNotExists(userManager, "Administrator", "admin", "admin@EGS.com", "EGS_2022", Constants.ADMIN_ROLE);
-            await SeedUserIfNotExists(userManager, "Alireza Mokhtari", "alireza", "alireza@my-EGS.com", "EGS_2022", Constants.CUSTOMER_ROLE);
+            await SeedUserIfNotExists(userManager, "Administrator", "admin", "admin@EGS.com", "Egs_2022@)", Constants.ADMIN_ROLE);
+            await SeedUserIfNotExists(userManager, "Alireza Mokhtari", "alireza", "alireza@EGS.com", "Egs_2022@)", Constants.CUSTOMER_ROLE);
         }
 
         private static async Task SeedRoleIfNotExists(RoleManager<IdentityRole> roleManager, string roleName)
@@ -30,8 +30,9 @@ namespace EGS.Infrastructure.Persistence
 
             if (userManager.Users.All(u => u.UserName != defaultUser.UserName))
             {
-                await userManager.CreateAsync(defaultUser, password);
-                await userManager.AddToRolesAsync(defaultUser, new[] { roleName });
+                var res = await userManager.CreateAsync(defaultUser, password);
+                if(res.Succeeded)
+                    await userManager.AddToRolesAsync(defaultUser, new[] { roleName });
             }
         }
 

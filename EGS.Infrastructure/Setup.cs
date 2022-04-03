@@ -1,6 +1,5 @@
 ﻿using EGS.Infrastructure.Identity;
 using EGS.Application.Common.Interfaces;
-using EGS.Infrastructure.Identity;
 using EGS.Infrastructure.Persistence;
 using EGS.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -27,8 +26,7 @@ namespace EGS.Infrastructure
 
             ConfigureIdentity(services, configuration);
 
-            AddRepositories(services);
-
+            AddRepositories(services);          
         }
 
         private static void AddRepositories(IServiceCollection services)
@@ -40,7 +38,8 @@ namespace EGS.Infrastructure
         {
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                ;
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
