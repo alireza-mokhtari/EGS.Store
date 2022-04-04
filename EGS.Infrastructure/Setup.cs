@@ -33,6 +33,7 @@ namespace EGS.Infrastructure
         private static void AddRepositories(IServiceCollection services)
         {
             services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IInventoryRepository, InventoryRepository>();
         }
 
         private static void ConfigureIdentity(IServiceCollection services, IConfiguration configuration)

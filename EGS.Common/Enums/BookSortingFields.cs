@@ -1,6 +1,6 @@
 ﻿namespace EGS.Domain.Enums
 {
-    public enum SearchOrder
+    public enum BookSortingFields
     {
         Price = 0,
         Popularity = 1,

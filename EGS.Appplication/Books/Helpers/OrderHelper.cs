@@ -11,15 +11,15 @@ namespace EGS.Application.Books.Helpers
 {
     public static class OrderHelper
     {
-        private static Dictionary<SearchOrder, Expression<Func<Book, object>>> OrderKeys
-            = new Dictionary<SearchOrder, Expression<Func<Book, object>>>()
+        private static Dictionary<BookSortingFields, Expression<Func<Book, object>>> OrderKeys
+            = new Dictionary<BookSortingFields, Expression<Func<Book, object>>>()
             {
-                {SearchOrder.Price,b=>b.Price },
-                {SearchOrder.Popularity,b=>b.TotalSold },
-                {SearchOrder.AddedDate,b=>b.CreateDate}
+                {BookSortingFields.Price,b=>b.Price },
+                {BookSortingFields.Popularity,b=>b.TotalSold },
+                {BookSortingFields.AddedDate,b=>b.CreateDate}
             };
 
-        public static Expression<Func<Book, object>> GetOrder(SearchOrder order)
+        public static Expression<Func<Book, object>> GetOrder(BookSortingFields order)
         {
             return OrderKeys[order];
         }

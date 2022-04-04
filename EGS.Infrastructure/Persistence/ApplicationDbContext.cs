@@ -19,7 +19,7 @@ namespace EGS.Infrastructure.Persistence
 
         public DbSet<BookGenre> BookGenres { get; set; }
         public DbSet<Book> Books { get; set; }
-
+        public DbSet<InventoryTransaction> Inventory { get; set; }
 
         public ApplicationDbContext(DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions,

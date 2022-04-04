@@ -5,18 +5,17 @@ using EGS.Domain.Common;
 using EGS.Infrastructure.Extensions;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace EGS.Infrastructure.Persistence.Repositories
 {
-    public class BaseRepositoryAsync<TEntity, TKey> : IRepositoryAsync<TEntity, TKey>
-        where TEntity : class, IEntity<TKey>, new()
+    public class AppendOnlyRepositoryAsync<TEntity, TKey> : IAppendOnlyRepositoryAsync<TEntity, TKey>
+    where TEntity : class, IEntity<TKey>, new()
     {
-        private readonly DbContext _context;
-        private readonly DbSet<TEntity> _dbSet;
+        protected readonly DbContext _context;
+        protected readonly DbSet<TEntity> _dbSet;
 
         #region Ctor
-        public BaseRepositoryAsync(IApplicationDbContext context)
+        public AppendOnlyRepositoryAsync(IApplicationDbContext context)
         {
             _context = context as DbContext;
             if (_context == null)
@@ -72,17 +71,7 @@ namespace EGS.Infrastructure.Persistence.Repositories
 
             return entry.Entity;
         }
-
-        public TEntity Update(TEntity entity)
-        {
-            var entry = _dbSet.Update(entity);
-            return entry.Entity;
-        }
-
-        public void Delete(TEntity entity)
-        {
-            _dbSet.Remove(entity);
-        }
+       
 
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {

@@ -30,8 +30,10 @@ namespace EGS.Application.Books.Queries
         public async Task<ServiceResult<BookDto>> Handle(GetBookQuery request, CancellationToken cancellationToken)
         {
             var book = await _bookRepository.GetByISBNAsync(request.ISBN, cancellationToken);
+            
+            var dto = _mapper.Map<BookDto>(book);            
 
-            return ServiceResult.Success(_mapper.Map<BookDto>(book));
+            return ServiceResult.Success(dto);
         }
     }
 }

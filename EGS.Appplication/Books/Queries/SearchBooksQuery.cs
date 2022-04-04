@@ -13,7 +13,7 @@ namespace EGS.Application.Books.Queries
         public string? Query { get; set; }
         public decimal? PriceFrom { get; set; }
         public decimal? PriceTo { get; set; }
-        public SearchOrder Order { get; set; }
+        public BookSortingFields Order { get; set; }
         public bool IsDescending { get; set; }
     }
 

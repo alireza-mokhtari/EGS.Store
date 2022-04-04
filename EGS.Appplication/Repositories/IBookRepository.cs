@@ -1,10 +1,11 @@
 ﻿using EGS.Application.Common.Interfaces;
+using EGS.Application.Dto;
 using EGS.Domain.Entities;
 
 namespace EGS.Application.Repositories
 {
-    public interface IBookRepository : IRepositoryAsync<Book , long>
+    public interface IBookRepository : ICrudRepositoryAsync<Book , long>
     {
-        Task<Book> GetByISBNAsync(string isbn, CancellationToken cancellationToken);
+        Task<BookDto> GetByISBNAsync(string isbn, CancellationToken cancellationToken);
     }
 }

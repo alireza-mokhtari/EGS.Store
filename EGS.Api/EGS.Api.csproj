@@ -27,10 +27,4 @@
     <ProjectReference Include="..\EGS.Infrastructure\EGS.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="PFX.pfx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
