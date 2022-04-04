@@ -7,6 +7,8 @@ namespace EGS.Application.Common.Interfaces
     public interface IRepositoryAsync<TEntity, TKey>
         where TEntity : class, IEntity<TKey>, new()        
     {
+        IQueryable<TEntity> AsQueryable();
+
         Task<TEntity> FirstOrDefaultAsync(CancellationToken cancellationToken,
             Expression<Func<TEntity, bool>> predicate = null,
             bool enableTracking = true,

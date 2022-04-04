@@ -10,12 +10,12 @@ namespace EGS.Application.Books.Commands.DeleteBookCommand
         {
             _bookRepository = bookRepository;
 
-            RuleFor(b => b.Id)
+            RuleFor(b => b.ISBN)
                 .NotNull().WithMessage("Book Id is not specified")
                 .Must(NotBeInOrder);
         }
 
-        private bool NotBeInOrder(long arg)
+        private bool NotBeInOrder(string isbn)
         {
             return true;
         }

@@ -27,7 +27,7 @@ namespace EGS.Infrastructure.Persistence.Repositories
 
         #region Read
 
-        protected virtual IQueryable<TEntity> AsQueryable()
+        public IQueryable<TEntity> AsQueryable()
         {
             return _dbSet.AsQueryable();
         }

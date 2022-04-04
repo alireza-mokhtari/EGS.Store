@@ -2,15 +2,13 @@
 using EGS.Application.Common.Models;
 using EGS.Application.Dto;
 using EGS.Application.Repositories;
-using EGS.Domain.Entities;
-using Mapster;
 using MapsterMapper;
 
 namespace EGS.Application.Books.Commands.DeleteBookCommand
 {
     public class DeleteBookCommand : IRequestWrapper<BookDto>
     {
-        public long Id { get; set; }
+        public string ISBN { get; set; }
     }
 
     public class DeleteBookCommandHandler : IRequestHandlerWrapper<DeleteBookCommand, BookDto>
@@ -25,7 +23,7 @@ namespace EGS.Application.Books.Commands.DeleteBookCommand
 
         public async Task<ServiceResult<BookDto>> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
         {
-            var existingBook = await _bookRepository.FirstOrDefaultAsync(cancellationToken, b => b.Id == request.Id, enableTracking: false);
+            var existingBook = await _bookRepository.FirstOrDefaultAsync(cancellationToken, b => b.ISBN == request.ISBN, enableTracking: false);
 
             _bookRepository.Delete(existingBook);
             await _bookRepository.SaveChangesAsync(cancellationToken);
