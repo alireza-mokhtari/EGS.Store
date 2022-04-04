@@ -1,4 +1,5 @@
 using EGS.Application.Books.Commands.CreateBookCommand;
+using EGS.Application.Books.Commands.DeleteBookCommand;
 using EGS.Application.Books.Commands.UpdateBookCommand;
 using EGS.Application.Common.Models;
 using EGS.Application.Dto;
@@ -36,6 +37,14 @@ namespace EGS.Api.Controllers
         public async Task<ActionResult<ServiceResult<BookDto>>> Update(UpdateBookCommand command, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(command, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResult<BookDto>>> Delete(long id, CancellationToken cancellationToken)
+        {
+            var result = await Mediator.Send(new DeleteBookCommand { Id = id }, cancellationToken);
             return Ok(result);
         }
 
