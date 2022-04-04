@@ -49,6 +49,11 @@ namespace EGS.Infrastructure.Persistence.Repositories
         }
 
 
+        public async Task<bool> AnyAsync(CancellationToken cancellationToken, Expression<Func<TEntity, bool>> predicate = null)
+        {
+            return await _dbSet.AnyAsync(predicate, cancellationToken);
+        }
+
         public Task<PaginatedList<TEntity>> GetPaginatedListAsync(CancellationToken cancellationToken,
             Expression<Func<TEntity, bool>> predicate = null,
             int pageSize = 10,

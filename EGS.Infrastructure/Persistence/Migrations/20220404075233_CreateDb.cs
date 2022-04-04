@@ -239,7 +239,7 @@ namespace EGS.Infrastructure.Persistence.Migrations
                     PublishDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Creator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Modifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Modifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>

@@ -3,6 +3,7 @@ using EGS.Application.Users.Queries.GetToken;
 using EGS.Application.Common.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EGS.Api.Controllers
 {
@@ -19,12 +20,14 @@ namespace EGS.Api.Controllers
         }
 
         [HttpPost(nameof(Login))]
+        [AllowAnonymous]
         public async Task<ActionResult<ServiceResult<LoginResponse>>> Login(GetTokenQuery query, CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(query, cancellationToken));
         }
 
         [HttpPost(nameof(Register))]
+        [AllowAnonymous]
         public async Task<ActionResult<ServiceResult<LoginResponse>>> Register(RegisterCustomerCommand query, CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(query, cancellationToken));

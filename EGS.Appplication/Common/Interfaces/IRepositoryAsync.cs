@@ -12,6 +12,9 @@ namespace EGS.Application.Common.Interfaces
             bool enableTracking = true,
             bool ignoreQueryFilters = false);
 
+        Task<bool> AnyAsync(CancellationToken cancellationToken,
+            Expression<Func<TEntity, bool>> predicate = null);
+
         public Task<PaginatedList<TEntity>> GetPaginatedListAsync(CancellationToken cancellationToken,
             Expression<Func<TEntity, bool>> predicate = null,
             int pageSize = 10,

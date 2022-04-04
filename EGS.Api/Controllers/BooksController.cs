@@ -1,4 +1,6 @@
-using EGS.Api.Controllers;
+using EGS.Application.Books.Commands.CreateBookCommand;
+using EGS.Application.Common.Models;
+using EGS.Application.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +20,14 @@ namespace EGS.Api.Controllers
         public BooksController(ISender mediator, ILogger<BooksController> logger) : base(mediator)
         {
             _logger = logger;
+        }
+
+        [HttpPost(nameof(Create))]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResult<BookDto>>> Create(CreateBookCommand command, CancellationToken cancellationToken)
+        {
+            var result = await Mediator.Send(command, cancellationToken);
+            return Ok(result);
         }
 
         [HttpGet(nameof(GetAll))]

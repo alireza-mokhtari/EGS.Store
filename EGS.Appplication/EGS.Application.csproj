@@ -23,4 +23,8 @@
     <ProjectReference Include="..\EGS.Common\EGS.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Books\Queries\" />
+  </ItemGroup>
+
 </Project>
