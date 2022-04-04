@@ -25,7 +25,7 @@ namespace EGS.Api
                 {
                     Title = "EGS Books API",
                     Version = "v1"
-                });
+                });                
 
                 // To Enable authorization using Swagger (JWT)    
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()

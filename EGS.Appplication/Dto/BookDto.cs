@@ -12,7 +12,7 @@ namespace EGS.Application.Dto
         public int GenreId { get; set; }
         public string Genre { get; set; }
         public long Downloads { get; set; }
-        public string Price { get; set; }
+        public decimal Price { get; set; }
         public DateTime PublishDate { get; set; }
         public string PublishDateString { get; set; }
 
@@ -20,7 +20,6 @@ namespace EGS.Application.Dto
         {
             config.NewConfig<Book, BookDto>()
                 .Map(dest => dest.Genre , src => src.Genre != null ? src.Genre.Title : "")
-                .Map(dest => dest.Price , src => src.Price.ToString())
                 .Map(dest => dest.PublishDateString , src => src.PublishDate.ToShortDateString())
                 ;            
         }

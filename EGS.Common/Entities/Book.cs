@@ -10,8 +10,8 @@ namespace EGS.Domain.Entities
         public string ISBN { get; set; }
         public int GenreId { get; set; }
         public BookGenre Genre { get; set; }
-        public long Downloads { get; set; }
-        public Money Price { get; set; }
+        public long TotalSold { get; set; }
+        public decimal Price { get; set; }
         public DateTime PublishDate { get; set; }
     }
 

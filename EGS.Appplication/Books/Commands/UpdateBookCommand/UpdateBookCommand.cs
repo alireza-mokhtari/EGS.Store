@@ -15,7 +15,7 @@ namespace EGS.Application.Books.Commands.UpdateBookCommand
         public string Author { get; set; }
         public string ISBN { get; set; }
         public int? GenreId { get; set; }
-        public Money Price { get; set; }
+        public decimal Price { get; set; }
         public DateTime PublishDate { get; set; }
 
         public void Register(TypeAdapterConfig config)

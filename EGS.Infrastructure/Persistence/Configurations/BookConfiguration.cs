@@ -15,11 +15,8 @@ namespace EGS.Infrastructure.Persistence.Configurations
                 .IsRequired()
                 .HasMaxLength(200);            
 
-            builder.Property(e => e.Price)
-                .HasConversion(
-                    v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
-                    v => JsonSerializer.Deserialize<Money>(v, (JsonSerializerOptions)null));
-
+            builder.Property(x => x.Price)
+                .HasColumnType("decimal(15,2)");
         }
     }
 }

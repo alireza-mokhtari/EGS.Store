@@ -182,9 +182,6 @@ namespace EGS.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("Downloads")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
 
@@ -198,9 +195,8 @@ namespace EGS.Infrastructure.Persistence.Migrations
                     b.Property<DateTime?>("ModifyDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Price")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(15,2)");
 
                     b.Property<DateTime>("PublishDate")
                         .HasColumnType("datetime2");
@@ -209,6 +205,9 @@ namespace EGS.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<long>("TotalSold")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
