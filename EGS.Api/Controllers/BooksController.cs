@@ -1,4 +1,5 @@
 using EGS.Application.Books.Commands.CreateBookCommand;
+using EGS.Application.Books.Commands.UpdateBookCommand;
 using EGS.Application.Common.Models;
 using EGS.Application.Dto;
 using MediatR;
@@ -25,6 +26,14 @@ namespace EGS.Api.Controllers
         [HttpPost(nameof(Create))]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResult<BookDto>>> Create(CreateBookCommand command, CancellationToken cancellationToken)
+        {
+            var result = await Mediator.Send(command, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpPut(nameof(Update))]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResult<BookDto>>> Update(UpdateBookCommand command, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(command, cancellationToken);
             return Ok(result);
