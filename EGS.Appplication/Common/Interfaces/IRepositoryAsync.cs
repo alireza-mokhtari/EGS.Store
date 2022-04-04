@@ -1,5 +1,6 @@
 ﻿using EGS.Application.Common.Models;
 using EGS.Domain.Common;
+using Mapster;
 using System.Linq.Expressions;
 
 namespace EGS.Application.Common.Interfaces
@@ -17,11 +18,11 @@ namespace EGS.Application.Common.Interfaces
         Task<bool> AnyAsync(CancellationToken cancellationToken,
             Expression<Func<TEntity, bool>> predicate = null);
 
-        public Task<PaginatedList<TEntity>> GetPaginatedListAsync(CancellationToken cancellationToken,
-            Expression<Func<TEntity, bool>> predicate = null,
+        public Task<PaginatedList<TOut>> GetPaginatedListAsync<TOut>(CancellationToken cancellationToken,
+            IQueryable<TEntity> query,
+            TypeAdapterConfig mapperConfig,
             int pageSize = 10,
-            int pageNumber = 1,
-            bool enableTracking = true);
+            int pageNumber = 1) where TOut : class;
 
         TEntity Insert(TEntity entity);
 

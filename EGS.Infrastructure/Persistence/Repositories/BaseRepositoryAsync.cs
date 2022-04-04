@@ -3,13 +3,14 @@ using EGS.Application.Common.Interfaces;
 using EGS.Application.Common.Models;
 using EGS.Domain.Common;
 using EGS.Infrastructure.Extensions;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace EGS.Infrastructure.Persistence.Repositories
 {
-    public class BaseRepositoryAsync<TEntity, TKey> : IRepositoryAsync<TEntity, TKey> 
-        where TEntity: class , IEntity<TKey> , new() 
+    public class BaseRepositoryAsync<TEntity, TKey> : IRepositoryAsync<TEntity, TKey>
+        where TEntity : class, IEntity<TKey>, new()
     {
         private readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;
@@ -22,7 +23,7 @@ namespace EGS.Infrastructure.Persistence.Repositories
                 throw new ArgumentNullException(nameof(context));
 
             _dbSet = _context.Set<TEntity>();
-        } 
+        }
         #endregion
 
         #region Read
@@ -54,18 +55,12 @@ namespace EGS.Infrastructure.Persistence.Repositories
             return await _dbSet.AnyAsync(predicate, cancellationToken);
         }
 
-        public Task<PaginatedList<TEntity>> GetPaginatedListAsync(CancellationToken cancellationToken,
-            Expression<Func<TEntity, bool>> predicate = null,
-            int pageSize = 10,
-            int pageNumber = 1,
-            bool enableTracking = true)
+        public Task<PaginatedList<TOut>> GetPaginatedListAsync<TOut>(CancellationToken cancellationToken,
+            IQueryable<TEntity> query, TypeAdapterConfig mapperConfig, int pageSize = 10, int pageNumber = 1) where TOut : class
         {
-            IQueryable<TEntity> query = _dbSet;
-            if (!enableTracking) query = query.AsNoTracking();
-
-            if (predicate != null) query = query.Where(predicate);
-
-            return query.PaginatedListAsync(pageNumber, pageSize, cancellationToken);
+            return query
+                .ProjectToType<TOut>(mapperConfig)
+                .PaginatedListAsync(pageNumber, pageSize, cancellationToken);
         }
 
         #endregion

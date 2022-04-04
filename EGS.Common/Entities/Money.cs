@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace EGS.Domain.Entities
 {
-    public readonly struct Money
+    public class Money
     {
         [JsonConstructor]
         public Money(decimal amount, Currency currency)

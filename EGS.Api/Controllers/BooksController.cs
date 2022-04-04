@@ -49,5 +49,12 @@ namespace EGS.Api.Controllers
             var result = await Mediator.Send(new GetBookQuery { ISBN = isbn }, cancellationToken);
             return Ok(result);
         }
+
+        [HttpGet]
+        public async Task<ActionResult<ServiceResult<PaginatedList<BookDto>>>> GetList([FromQuery] GetPaginatedBooksQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
     }
 }
