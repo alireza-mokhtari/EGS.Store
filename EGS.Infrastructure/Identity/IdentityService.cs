@@ -102,5 +102,10 @@ namespace EGS.Infrastructure.Identity
                 .PaginatedListAsync(pageNumber, pageSize, cancellationToken);
 
         }
+
+        public Task<IList<string>> GetRolesAsync(ApplicationUserDto user)
+        {
+            return _userManager.GetRolesAsync(_mapper.Map<ApplicationUser>(user));
+        }
     }
 }

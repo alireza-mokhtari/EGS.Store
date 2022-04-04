@@ -56,6 +56,8 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+app.UseIdentityServer();
 app.UseAuthorization();
 
 app.MapDefaultControllerRoute();

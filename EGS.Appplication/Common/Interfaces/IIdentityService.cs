@@ -18,5 +18,6 @@ namespace EGS.Application.Common.Interfaces
         Task<Result> DeleteUserAsync(string userId);
         Task<PaginatedList<ApplicationUserDto>> GetPaginatedListAsync(int pageSize, int pageNumber,
             CancellationToken cancellationToken);
+        Task<IList<string>> GetRolesAsync(ApplicationUserDto user);
     }
 }

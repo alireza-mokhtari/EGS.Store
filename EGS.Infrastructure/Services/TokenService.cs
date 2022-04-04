@@ -18,13 +18,16 @@ namespace EGS.Infrastructure.Services
             _configuration = configuration;
         }
 
-        public string CreateJwtSecurityToken(string id)
+        public string CreateJwtSecurityToken(string id, List<string> roles)
         {
             var authClaims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, id),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
+
+            foreach (var role in roles)
+                authClaims.Add(new Claim(ClaimTypes.Role, role));            
 
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 

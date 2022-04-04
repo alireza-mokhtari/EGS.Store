@@ -1,10 +1,12 @@
+using EGS.Api.Controllers;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EGS.WebApi.Controllers
+namespace EGS.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class BooksController : ControllerBase
+    public class BooksController : BaseApiController
     {
         private static readonly string[] Summaries = new[]
         {
@@ -13,12 +15,13 @@ namespace EGS.WebApi.Controllers
 
         private readonly ILogger<BooksController> _logger;
 
-        public BooksController(ILogger<BooksController> logger)
+        public BooksController(ISender mediator, ILogger<BooksController> logger) : base(mediator)
         {
             _logger = logger;
         }
 
         [HttpGet(nameof(GetAll))]
+        [Authorize(Roles = "Customer")]
         public IActionResult GetAll()
         {
             return Ok(Summaries);

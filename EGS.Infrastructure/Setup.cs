@@ -12,6 +12,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using EGS.Application.Repositories;
 using EGS.Infrastructure.Persistence.Repositories;
+using System.Security.Cryptography.X509Certificates;
 
 namespace EGS.Infrastructure
 {
@@ -36,13 +37,21 @@ namespace EGS.Infrastructure
 
         private static void ConfigureIdentity(IServiceCollection services, IConfiguration configuration)
         {
+            string pfxPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, configuration["IdentityServer:Key:FilePath"]);
+            string pfxPassword = configuration["IdentityServer:Key:Password"];
+
+
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                ;
+                .AddEntityFrameworkStores<ApplicationDbContext>()                
+            ;
 
             services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
+                .AddDeveloperSigningCredential()
+                .AddInMemoryApiScopes(Config.ApiScopes)
+                .AddInMemoryClients(Config.Clients);
+                //.AddSigningCredential(new X509Certificate2(pfxPath, pfxPassword));
 
             services.AddTransient<IIdentityService, IdentityService>();
             services.AddTransient<ITokenService, TokenService>();
