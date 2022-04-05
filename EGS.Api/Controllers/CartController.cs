@@ -1,13 +1,7 @@
 using EGS.Api.Models;
-using EGS.Application.Books.Commands.CreateBookCommand;
-using EGS.Application.Books.Commands.DeleteBookCommand;
-using EGS.Application.Books.Commands.UpdateBookCommand;
-using EGS.Application.Books.Queries;
 using EGS.Application.Common.Interfaces;
 using EGS.Application.Common.Models;
 using EGS.Application.Dto;
-using EGS.Application.Inventory.Commands.AddStockCommand;
-using EGS.Application.Inventory.Commands.ReduceStockCommand;
 using EGS.Application.ShoppingCart.Commands.AddToCartCommand;
 using EGS.Application.ShoppingCart.Commands.DeleteCartItemCommand;
 using EGS.Application.ShoppingCart.Commands.UpdateCartItemCommand;

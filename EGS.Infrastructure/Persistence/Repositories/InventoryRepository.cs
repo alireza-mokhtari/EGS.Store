@@ -1,4 +1,5 @@
 ﻿using EGS.Application.Common.Interfaces;
+using EGS.Application.Dto;
 using EGS.Application.Repositories;
 using EGS.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,11 @@ namespace EGS.Infrastructure.Persistence.Repositories
         {
         }
 
+        public void BulkInsert(IEnumerable<InventoryTransaction> inventoryTransactions)
+        {
+            _dbSet.AddRange(inventoryTransactions);
+        }
+
         public async Task<int> GetStock(long bookId, CancellationToken cancellationToken)
         {
             var latestTransaction = await _dbSet.Where(b => b.Id == bookId)
@@ -21,5 +27,6 @@ namespace EGS.Infrastructure.Persistence.Repositories
 
             return latestTransaction != null ? latestTransaction.Stock : 0;
         }
+
     }
 }

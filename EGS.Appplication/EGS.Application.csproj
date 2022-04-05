@@ -24,9 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Orders\Commands\CancelOrderCommand\" />
-    <Folder Include="Orders\Commands\ProcessOrderCommand\" />
-    <Folder Include="Orders\Queries\CustomerOrdersQuery\" />
+    <Folder Include="Orders\Queries\OrderHistoryQuery\" />
+    <Folder Include="UnitOfWorks\" />
   </ItemGroup>
 
 </Project>
