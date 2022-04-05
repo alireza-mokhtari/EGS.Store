@@ -10,7 +10,7 @@ namespace EGS.Application.Books.Commands.CreateBookCommand
         public CreateBookCommandValidator(IBookRepository bookRepository)
         {
             _bookRepository = bookRepository;
-
+            CascadeMode = CascadeMode.Stop;
 
             RuleFor(b => b.Title)
                 .NotEmpty().WithMessage("Book Title is requried")
