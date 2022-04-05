@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Authentication;
 using EGS.Application.Repositories;
 using EGS.Infrastructure.Persistence.Repositories;
 using System.Security.Cryptography.X509Certificates;
+using EGS.Infrastructure.Persistence.UnitOfWorks;
+using EGS.Application.UnitOfWorks;
 
 namespace EGS.Infrastructure
 {
@@ -36,7 +38,7 @@ namespace EGS.Infrastructure
             services.AddScoped<IInventoryRepository, InventoryRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
-
+            services.AddScoped<IOrderUnitOfWorkAsync, OrderUnitOfWork>();
         }
 
 

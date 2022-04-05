@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Orders\Queries\OrderHistoryQuery\" />
-    <Folder Include="UnitOfWorks\" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,7 @@
 using EGS.Application.Common.Models;
 using EGS.Application.Dto;
 using EGS.Application.Repositories;
+using EGS.Application.UnitOfWorks;
 using EGS.Domain.Entities;
 using EGS.Domain.Enums;
 using EGS.Domain.Events;
@@ -19,30 +20,31 @@ namespace EGS.Application.Orders.Commands.ProcessOrderCommand
     public class ProcessOrderCommandHandler : IRequestHandlerWrapper<ProcessOrderCommand, OrderDto>
     {
         private readonly IMapper _mapper;
-        private readonly IOrderRepository _orderRepository;
+        private readonly IOrderUnitOfWorkAsync _uow;
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTime _dateTime;
         private readonly IDomainEventService _domainEventService;
-        private readonly IInventoryRepository _inventoryRepository;
 
-        public ProcessOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper,
+        public ProcessOrderCommandHandler(IMapper mapper,
             ICurrentUserService currentUserService, IDateTime dateTime,
-            IDomainEventService domainEventService, IInventoryRepository inventoryRepository)
+            IDomainEventService domainEventService, IOrderUnitOfWorkAsync uow)
         {
-            _orderRepository = orderRepository;
+            _uow = uow;
             _mapper = mapper;
             _currentUserService = currentUserService;
             _dateTime = dateTime;
             _domainEventService = domainEventService;
-            _inventoryRepository = inventoryRepository;
         }
 
         public async Task<ServiceResult<OrderDto>> Handle(ProcessOrderCommand request, CancellationToken cancellationToken)
         {
-            var order = await _orderRepository.FirstOrDefaultAsync(cancellationToken, o => o.Id == request.OrderId, enableTracking: false);
+            var orderRepository = _uow.OrderRepository;
+            var inventoryRepository = _uow.InventoryRepository;
+
+            var order = await orderRepository.FirstOrDefaultAsync(cancellationToken, o => o.Id == request.OrderId, enableTracking: false);
             order.OrderHistories.Add(BuildHistory(request));
-            var res = _orderRepository.Update(order);
-            var stocks = await _orderRepository.GetOrderStocks(request.OrderId);
+            var res = orderRepository.Update(order);
+            var stocks = await orderRepository.GetOrderStocks(request.OrderId);
 
             var inventoryTransactions = order.OrderItems.Select(o => new InventoryTransaction
             {
@@ -54,10 +56,9 @@ namespace EGS.Application.Orders.Commands.ProcessOrderCommand
                 UserId = _currentUserService.UserId
             });
 
-            _inventoryRepository.BulkInsert(inventoryTransactions);
+            inventoryRepository.BulkInsert(inventoryTransactions);
 
-            await _orderRepository.SaveChangesAsync(cancellationToken);
-            //TODO: Move to Unit Of Work
+            await _uow.CommitAsync(cancellationToken);
 
             if (request.IsVerified)
                 await _domainEventService.Publish(new OrderCompletedEvent(request.OrderId));
