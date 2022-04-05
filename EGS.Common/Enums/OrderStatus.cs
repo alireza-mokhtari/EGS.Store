@@ -2,9 +2,8 @@
 {
     public enum OrderStatus
     {
-        Cart = 0,
-        CheckedOut = 1,
-        Completed = 2,
-        Cancelled = 3
+        CheckedOut = 0,
+        Completed = 1,
+        Cancelled = 2
     }
 }

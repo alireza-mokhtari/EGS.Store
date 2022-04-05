@@ -1,4 +1,5 @@
 ﻿using EGS.Domain.Entities;
+using EGS.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Text.Json;
@@ -13,10 +14,16 @@ namespace EGS.Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.Title)
                 .IsRequired()
-                .HasMaxLength(200);            
+                .HasMaxLength(200);
 
             builder.Property(x => x.Price)
-                .HasColumnType("decimal(15,2)");
+                .IsPriceColumn();
+
+            builder.Property(x => x.Modifier)
+                .HasMaxLength(450);
+
+            builder.Property(x => x.Creator)
+                .HasMaxLength(450);
         }
     }
 }
