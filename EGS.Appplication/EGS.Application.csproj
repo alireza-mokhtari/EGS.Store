@@ -24,7 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ShoppingCart\Commands\CheckoutCommand\" />
+    <Folder Include="Orders\Commands\CancelOrderCommand\" />
+    <Folder Include="Orders\Commands\ProcessOrderCommand\" />
+    <Folder Include="Orders\Queries\CustomerOrdersQuery\" />
   </ItemGroup>
 
 </Project>

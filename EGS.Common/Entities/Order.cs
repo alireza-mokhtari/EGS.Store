@@ -12,7 +12,7 @@ namespace EGS.Domain.Entities
         }
 
         public long Id { get; set; }
-        public string CustomerId { get; set; }
+        public string CustomerId { get; set; }        
         public string Comment { get; set; }
         public IList<OrderItem> OrderItems { get; set; }
         public IList<OrderHistory> OrderHistories { get; set; }

@@ -1,7 +1,10 @@
 ﻿using EGS.Application.Common.Interfaces;
+using EGS.Application.Dto;
 using EGS.Application.Repositories;
 using EGS.Domain.Entities;
 using EGS.Domain.Enums;
+using Mapster;
+using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace EGS.Infrastructure.Persistence.Repositories
@@ -10,14 +13,16 @@ namespace EGS.Infrastructure.Persistence.Repositories
     {
         private readonly DbSet<ShoppingCartHistory> _historyDbSet;
         private readonly IDateTime _dateTime;
-        public CartRepository(IApplicationDbContext context, IDateTime dateTime) : base(context)
+        private readonly IMapper _mapper;
+        public CartRepository(IApplicationDbContext context, IDateTime dateTime, IMapper mapper) : base(context)
         {
-            var ctx  = context as DbContext;
+            var ctx = context as DbContext;
             if (ctx == null)
                 throw new ArgumentNullException(nameof(context));
 
             _historyDbSet = ctx.Set<ShoppingCartHistory>();
             _dateTime = dateTime;
+            _mapper = mapper;
         }
 
         public override ShoppingCartItem Insert(ShoppingCartItem cartItem)
@@ -63,5 +68,12 @@ namespace EGS.Infrastructure.Persistence.Repositories
             });
         }
 
+        public Task<List<ShoppingCartItemDto>> GetCartItems(string customerId, CancellationToken cancellationToken)
+        {
+            return AsQueryable()
+                .Where(c => c.CustomerId == customerId && c.ExpiresAt >= _dateTime.Now)
+                .ProjectToType<ShoppingCartItemDto>(_mapper.Config)
+                .ToListAsync();            
+        }
     }
 }

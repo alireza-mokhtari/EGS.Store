@@ -35,7 +35,10 @@ namespace EGS.Infrastructure
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IInventoryRepository, InventoryRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+
         }
+
 
         private static void ConfigureIdentity(IServiceCollection services, IConfiguration configuration)
         {
