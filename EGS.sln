@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{C6A7FCBA-3
 		docs\data-model.png = docs\data-model.png
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGS.Application.UnitTests", "EGS.Application.UnitTests\EGS.Application.UnitTests.csproj", "{2869238E-4104-4017-96E3-B11FF989459B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGS.Application.UnitTests", "tests\EGS.Application.UnitTests\EGS.Application.UnitTests.csproj", "{2869238E-4104-4017-96E3-B11FF989459B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
