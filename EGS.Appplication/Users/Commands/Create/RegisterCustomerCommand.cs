@@ -24,7 +24,7 @@ namespace EGS.Application.Users.Commands.Create
         {
 
             var (result, userId) = await _identityService
-                .CreateUserAsync(request.Email, request.Password, Constants.CUSTOMER_ROLE);
+                .CreateUserAsync(request.Email, request.Password, SecurityConstants.CUSTOMER_ROLE);
             
             return result.Succeeded 
                 ? ServiceResult.Success(userId) 

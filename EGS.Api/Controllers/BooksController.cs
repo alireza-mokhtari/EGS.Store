@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace EGS.Api.Controllers
 {
     [ApiController]
-    [Authorize(Roles = "Admin")]
     public class BooksController : BaseApiController
     {
         private readonly ILogger<BooksController> _logger;
@@ -24,6 +23,7 @@ namespace EGS.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResult<BookDto>>> Create(CreateBookCommand command, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(command, cancellationToken);
@@ -31,6 +31,7 @@ namespace EGS.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResult<BookDto>>> Update(UpdateBookCommand command, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(command, cancellationToken);
@@ -38,6 +39,7 @@ namespace EGS.Api.Controllers
         }
 
         [HttpDelete("{isbn}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResult<BookDto>>> Delete(string isbn, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(new DeleteBookCommand { ISBN = isbn }, cancellationToken);
@@ -45,6 +47,7 @@ namespace EGS.Api.Controllers
         }
 
         [HttpGet("{isbn}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResult<BookDto>>> GetByISBN(string isbn, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(new GetBookQuery { ISBN = isbn }, cancellationToken);
@@ -52,6 +55,7 @@ namespace EGS.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResult<PaginatedList<BookDto>>>> GetList([FromQuery] GetPaginatedBooksQuery request, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(request, cancellationToken);
@@ -67,6 +71,7 @@ namespace EGS.Api.Controllers
         }
 
         [HttpPost("add-stock")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResult<InventoryTransactionDto>>> AddStock([FromBody] AddStockCommand request, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(request, cancellationToken);
@@ -74,6 +79,7 @@ namespace EGS.Api.Controllers
         }
 
         [HttpPost("reduce-stock")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResult<InventoryTransactionDto>>> ReduceStock([FromBody] ReduceStockCommand request, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(request, cancellationToken);

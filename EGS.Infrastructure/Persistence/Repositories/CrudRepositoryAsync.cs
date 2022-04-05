@@ -16,13 +16,13 @@ namespace EGS.Infrastructure.Persistence.Repositories
 
         #region Write
 
-        public TEntity Update(TEntity entity)
+        public virtual TEntity Update(TEntity entity)
         {
             var entry = _dbSet.Update(entity);
             return entry.Entity;
         }
 
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             _dbSet.Remove(entity);
         }

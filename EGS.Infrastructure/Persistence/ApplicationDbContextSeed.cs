@@ -9,11 +9,11 @@ namespace EGS.Infrastructure.Persistence
     {
         public static async Task SeedSampleIdentitiesAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            await SeedRoleIfNotExists(roleManager, Constants.ADMIN_ROLE);
-            await SeedRoleIfNotExists(roleManager, Constants.CUSTOMER_ROLE);
+            await SeedRoleIfNotExists(roleManager, SecurityConstants.ADMIN_ROLE);
+            await SeedRoleIfNotExists(roleManager, SecurityConstants.CUSTOMER_ROLE);
 
-            await SeedUserIfNotExists(userManager, "Administrator", "admin@EGS.com", "Egs_2022@)", Constants.ADMIN_ROLE);
-            await SeedUserIfNotExists(userManager, "Alireza Mokhtari", "alireza@EGS.com", "Egs_2022@)", Constants.CUSTOMER_ROLE);
+            await SeedUserIfNotExists(userManager, "Administrator", "admin@EGS.com", "Egs_2022@)", SecurityConstants.ADMIN_ROLE);
+            await SeedUserIfNotExists(userManager, "Alireza Mokhtari", "alireza@EGS.com", "Egs_2022@)", SecurityConstants.CUSTOMER_ROLE);
         }
 
         private static async Task SeedRoleIfNotExists(RoleManager<IdentityRole> roleManager, string roleName)

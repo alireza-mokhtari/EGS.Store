@@ -32,7 +32,7 @@ namespace EGS.Infrastructure.Persistence.Repositories
             return _dbSet.AsQueryable();
         }
 
-        public async Task<TEntity> FirstOrDefaultAsync(CancellationToken cancellationToken,
+        public virtual async Task<TEntity> FirstOrDefaultAsync(CancellationToken cancellationToken,
            Expression<Func<TEntity, bool>> predicate = null,
            bool enableTracking = true,
            bool ignoreQueryFilters = false)
@@ -49,12 +49,12 @@ namespace EGS.Infrastructure.Persistence.Repositories
         }
 
 
-        public async Task<bool> AnyAsync(CancellationToken cancellationToken, Expression<Func<TEntity, bool>> predicate = null)
+        public virtual async Task<bool> AnyAsync(CancellationToken cancellationToken, Expression<Func<TEntity, bool>> predicate = null)
         {
             return await _dbSet.AnyAsync(predicate, cancellationToken);
         }
 
-        public Task<PaginatedList<TOut>> GetPaginatedListAsync<TOut>(CancellationToken cancellationToken,
+        public virtual Task<PaginatedList<TOut>> GetPaginatedListAsync<TOut>(CancellationToken cancellationToken,
             IQueryable<TEntity> query, TypeAdapterConfig mapperConfig, int pageSize = 10, int pageNumber = 1) where TOut : class
         {
             return query
@@ -65,7 +65,7 @@ namespace EGS.Infrastructure.Persistence.Repositories
         #endregion
 
         #region Write
-        public TEntity Insert(TEntity entity)
+        public virtual TEntity Insert(TEntity entity)
         {
             var entry = _dbSet.Add(entity);
 
