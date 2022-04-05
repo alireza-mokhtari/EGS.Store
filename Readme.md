@@ -12,6 +12,10 @@ The project contains below layers:
 
 **\*\*** All the layers utilize the most recent version of _.Net 6_.
 
+## Data Model
+
+![alt text](./docs/data-model.png)
+
 ## Technologies
 
 Thanks to open-source contributions, below well-known libraries and frameworks are being used in this project:

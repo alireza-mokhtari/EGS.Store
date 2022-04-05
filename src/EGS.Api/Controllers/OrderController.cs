@@ -22,7 +22,7 @@ namespace EGS.Api.Controllers
             _currentUserService = currentUserService;
         }
 
-        [HttpPost]
+        [HttpPost(nameof(Checkout))]
         [Authorize(Roles = "Customer")]
         public async Task<ActionResult<ServiceResult<OrderDto>>> Checkout(CheckoutCartCommand command, CancellationToken cancellationToken)
         {
@@ -30,7 +30,7 @@ namespace EGS.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost(nameof(Process))]
         public async Task<ActionResult<ServiceResult<OrderDto>>> Process(ProcessOrderCommand command, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(command, cancellationToken);

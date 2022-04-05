@@ -14,18 +14,27 @@ namespace EGS.Api
 
             services.AddHttpContextAccessor();
 
-            services.AddControllers(options => options.Filters.Add<ApiExceptionFilterAttribute>());
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<ApiExceptionFilterAttribute>();
+            });
+
+            services.Configure<RouteOptions>(options =>
+            {
+                options.LowercaseUrls = true;
+                options.LowercaseQueryStrings = true;
+            });
 
             services.AddFluentValidation();
             services.AddEndpointsApiExplorer();
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "EGS Books API",
                     Version = "v1"
-                });                
+                });
 
                 // To Enable authorization using Swagger (JWT)    
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
