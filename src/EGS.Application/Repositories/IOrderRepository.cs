@@ -10,5 +10,6 @@ namespace EGS.Application.Repositories
     {
         Task<OrderStatus> GetOrderStatus(long orderId);
         Task<List<OrderStockDto>> GetOrderStocks(long orderId);
+        Task<Order?> GetOrder(long orderId, CancellationToken cancellationToken);
     }
 }

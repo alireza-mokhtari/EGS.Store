@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace EGS.Api.Controllers
 {
     [ApiController]
-    [Authorize(Roles = "Admin")]
     public class OrderController : BaseApiController
     {
         private readonly ILogger<CartController> _logger;
@@ -31,6 +30,7 @@ namespace EGS.Api.Controllers
         }
 
         [HttpPost(nameof(Process))]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResult<OrderDto>>> Process(ProcessOrderCommand command, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(command, cancellationToken);

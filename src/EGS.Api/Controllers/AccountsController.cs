@@ -32,6 +32,5 @@ namespace EGS.Api.Controllers
         {
             return Ok(await Mediator.Send(query, cancellationToken));
         }
-
     }
 }

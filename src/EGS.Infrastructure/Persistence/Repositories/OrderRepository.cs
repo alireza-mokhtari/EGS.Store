@@ -45,5 +45,12 @@ namespace EGS.Infrastructure.Persistence.Repositories
                 .Select(o => o.OrderStatus)
                 .FirstOrDefaultAsync();
         }
+
+        public Task<Order?> GetOrder(long orderId, CancellationToken cancellationToken)
+        {
+            return _dbSet.Include(o => o.OrderItems)
+                .Include(o => o.OrderHistories)
+                .FirstOrDefaultAsync(o => o.Id == orderId, cancellationToken);
+        }
     }
 }

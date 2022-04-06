@@ -41,7 +41,8 @@ namespace EGS.Application.Orders.Commands.ProcessOrderCommand
             var orderRepository = _uow.OrderRepository;
             var inventoryRepository = _uow.InventoryRepository;
 
-            var order = await orderRepository.FirstOrDefaultAsync(cancellationToken, o => o.Id == request.OrderId, enableTracking: false);
+            var order = await orderRepository.GetOrder(request.OrderId,cancellationToken);
+
             order.OrderHistories.Add(BuildHistory(request));
             var res = orderRepository.Update(order);
             var stocks = await orderRepository.GetOrderStocks(request.OrderId);
@@ -51,7 +52,7 @@ namespace EGS.Application.Orders.Commands.ProcessOrderCommand
                 BookId = o.BookId,
                 Decremented = o.Quantity,
                 ModifiedOn = _dateTime.Now,
-                Stock = stocks.FirstOrDefault(s => s.BookId == o.BookId)?.Stock ?? 0,
+                Stock = stocks.FirstOrDefault(s => s.BookId == o.BookId)?.Stock - o.Quantity ?? 0,
                 Reason = InventoryTransactionType.OrderCompletion,
                 UserId = _currentUserService.UserId
             });
