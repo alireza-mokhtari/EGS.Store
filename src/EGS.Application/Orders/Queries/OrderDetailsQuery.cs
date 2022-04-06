@@ -7,16 +7,16 @@ using MapsterMapper;
 
 namespace EGS.Application.Books.Queries
 {
-    public class OrderDetailsQuery : PageableQuery, IRequestWrapper<OrderDto>
+    public class OrderDetailsQuery : IRequestWrapper<OrderDto>
     {
         public long OrderId { get; set; }
     }
 
-    public class OrderDetailsQueryandler : IRequestHandlerWrapper<OrderDetailsQuery, OrderDto>
+    public class OrderDetailsQueryHandler : IRequestHandlerWrapper<OrderDetailsQuery, OrderDto>
     {
         private readonly IOrderRepository _ordersRepository;
         private readonly IMapper _mapper;
-        public OrderDetailsQueryandler(IOrderRepository orderRepository, IMapper mapper)
+        public OrderDetailsQueryHandler(IOrderRepository orderRepository, IMapper mapper)
         {
             _ordersRepository = orderRepository;
             _mapper = mapper;

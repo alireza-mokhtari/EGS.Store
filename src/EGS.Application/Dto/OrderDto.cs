@@ -26,18 +26,16 @@ namespace EGS.Application.Dto
         }
     }
 
-    public class OrderHistoryDto : IRegister
+    public class OrderHistoryItemDto : IRegister
     {
         public long OrderId { get; set; }
-        public string CustomerId { get; set; }
         public string UserId { get; set; }
         public string Status { get; set; }
         public string OccuredAt { get; set; }
 
         public void Register(TypeAdapterConfig config)
         {
-            config.NewConfig<OrderHistory, OrderHistoryDto>()
-                .Map(dest => dest.CustomerId, src => src.Order != null ? src.Order.CustomerId : "")
+            config.NewConfig<OrderHistory, OrderHistoryItemDto>()
                 .Map(dest => dest.Status, src => src.OrderStatus.ToString())
                 .Map(dest => dest.OccuredAt, src => $"{src.OccuredAt.ToShortDateString()} {src.OccuredAt.ToShortTimeString()}");
         }

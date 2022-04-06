@@ -76,5 +76,13 @@ namespace EGS.Api.Controllers
             var result = await Mediator.Send(new OrderDetailsQuery { OrderId = id }, cancellationToken);
             return Ok(result);
         }
+
+        [HttpGet("{id}/history")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResult<List<OrderHistoryItemDto>>>> GetHistory(long id, CancellationToken cancellationToken)
+        {
+            var result = await Mediator.Send(new OrderHistoryQuery { OrderId = id }, cancellationToken);
+            return Ok(result);
+        }
     }
 }

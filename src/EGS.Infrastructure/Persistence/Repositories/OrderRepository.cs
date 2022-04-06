@@ -3,6 +3,7 @@ using EGS.Application.Dto;
 using EGS.Application.Repositories;
 using EGS.Domain.Entities;
 using EGS.Domain.Enums;
+using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,6 +52,17 @@ namespace EGS.Infrastructure.Persistence.Repositories
             return _dbSet.Include(o => o.OrderItems)
                 .Include(o => o.OrderHistories)
                 .FirstOrDefaultAsync(o => o.Id == orderId, cancellationToken);
+        }
+
+        public Task<List<OrderHistoryItemDto>> GetHistory(long orderId, CancellationToken cancellationToken)
+        {
+            return
+                _context
+                .Set<OrderHistory>()
+                .Where(o => o.Id == orderId)
+                .OrderBy(o => o.OccuredAt)
+                .ProjectToType<OrderHistoryItemDto>(_mapper.Config)
+                .ToListAsync(cancellationToken);
         }
     }
 }
