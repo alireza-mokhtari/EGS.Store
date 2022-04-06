@@ -4,7 +4,7 @@ using EGS.Application.Dto;
 using EGS.Application.Repositories;
 using MapsterMapper;
 
-namespace EGS.Application.Orders.Queries.CustomerOrdersQuery
+namespace EGS.Application.Orders.Queries
 {
     public class CustomerOrdersQuery : PageableQuery, IRequestWrapper<PaginatedList<OrderSummaryDto>>
     {

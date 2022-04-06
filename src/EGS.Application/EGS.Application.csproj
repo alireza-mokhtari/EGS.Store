@@ -23,8 +23,4 @@
     <ProjectReference Include="..\EGS.Common\EGS.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Orders\Queries\OrderHistoryQuery\" />
-  </ItemGroup>
-
 </Project>

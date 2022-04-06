@@ -1,9 +1,10 @@
+using EGS.Application.Books.Queries;
 using EGS.Application.Common.Interfaces;
 using EGS.Application.Common.Models;
 using EGS.Application.Dto;
 using EGS.Application.Orders.Commands.CheckoutCartCommand;
 using EGS.Application.Orders.Commands.ProcessOrderCommand;
-using EGS.Application.Orders.Queries.CustomerOrdersQuery;
+using EGS.Application.Orders.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -37,9 +38,9 @@ namespace EGS.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("my-orders")]
         [Authorize(Roles = "Customer")]
-        public async Task<ActionResult<ServiceResult<PaginatedList<OrderSummaryDto>>>> GetMyOrders([FromQuery]PageableQuery options, CancellationToken cancellationToken)
+        public async Task<ActionResult<ServiceResult<PaginatedList<OrderSummaryDto>>>> GetMyOrders([FromQuery] PageableQuery options, CancellationToken cancellationToken)
         {
             var query = new CustomerOrdersQuery
             {
@@ -52,13 +53,28 @@ namespace EGS.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet(nameof(GetCustomerOrders))]
+        [HttpGet("customer-orders")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ServiceResult<PaginatedList<OrderSummaryDto>>>> GetCustomerOrders([FromQuery]CustomerOrdersQuery query, CancellationToken cancellationToken)
+        public async Task<ActionResult<ServiceResult<PaginatedList<OrderSummaryDto>>>> GetCustomerOrders([FromQuery] CustomerOrdersQuery query, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(query, cancellationToken);
             return Ok(result);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResult<PaginatedList<OrderSummaryDto>>>> GetList([FromQuery] GetPaginatedOrdersQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResult<PaginatedList<OrderSummaryDto>>>> GetList(long id, CancellationToken cancellationToken)
+        {
+            var result = await Mediator.Send(new OrderDetailsQuery { OrderId = id }, cancellationToken);
+            return Ok(result);
+        }
     }
 }
