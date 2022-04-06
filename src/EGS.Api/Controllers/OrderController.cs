@@ -39,7 +39,7 @@ namespace EGS.Api.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Customer")]
-        public async Task<ActionResult<ServiceResult<PaginatedList<OrderSummaryDto>>>> GetCustomerOrders(PageableQuery options, CancellationToken cancellationToken)
+        public async Task<ActionResult<ServiceResult<PaginatedList<OrderSummaryDto>>>> GetMyOrders([FromQuery]PageableQuery options, CancellationToken cancellationToken)
         {
             var query = new CustomerOrdersQuery
             {
@@ -48,6 +48,14 @@ namespace EGS.Api.Controllers
                 PageSize = options.PageSize
             };
 
+            var result = await Mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpGet(nameof(GetCustomerOrders))]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResult<PaginatedList<OrderSummaryDto>>>> GetCustomerOrders([FromQuery]CustomerOrdersQuery query, CancellationToken cancellationToken)
+        {
             var result = await Mediator.Send(query, cancellationToken);
             return Ok(result);
         }
